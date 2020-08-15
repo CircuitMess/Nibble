@@ -1,0 +1,30 @@
+#include "Nibble.h"
+#include <CircuitOS.h>
+#include <Display/Display.h>
+#include <Input/I2cExpander.h>
+#include <Input/InputI2C.h>
+
+NibbleImpl Nibble;
+
+void NibbleImpl::begin(){
+	display = new Display(128, 128, -1, 0);
+	expander = new I2cExpander();
+
+	display->begin();
+	display->getBaseSprite()->clear(TFT_BLACK);
+	display->commit();
+
+	expander->begin(0x74, 4, 5);
+	expander->pinMode(BL_PIN, OUTPUT);
+	expander->pinWrite(BL_PIN, 1);
+
+	new InputI2C(expander);
+}
+
+Display* NibbleImpl::getDisplay(){
+	return display;
+}
+
+I2cExpander* NibbleImpl::getExpander(){
+	return expander;
+}
