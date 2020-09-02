@@ -11,12 +11,15 @@
 
 class NibbleImpl {
 public:
+
+	/**
+	 * Initializes display, backlight, I2C expander, I2C input, and pre-registers all buttons.
+	 */
 	void begin();
 
 	Display* getDisplay();
 	I2cExpander* getExpander();
 	InputI2C* getInput();
-
 
 private:
 	Display* display;
