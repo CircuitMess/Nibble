@@ -16,6 +16,8 @@ void NibbleImpl::begin(){
 
 	input = new InputI2C(expander);
 	input->preregisterButtons({ BTN_A, BTN_B, BTN_C, BTN_UP, BTN_DOWN, BTN_RIGHT, BTN_LEFT });
+
+	Piezo.begin(BUZZ_PIN);
 }
 
 Display* NibbleImpl::getDisplay(){

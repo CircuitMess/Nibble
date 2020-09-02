@@ -8,12 +8,13 @@
 #include <Display/Sprite.h>
 #include <Input/I2cExpander.h>
 #include <Input/InputI2C.h>
+#include <Audio/Piezo.h>
 
 class NibbleImpl {
 public:
 
 	/**
-	 * Initializes display, backlight, I2C expander, I2C input, and pre-registers all buttons.
+	 * Initializes display, backlight, Piezo, I2C expander, I2C input, and pre-registers all buttons.
 	 */
 	void begin();
 
