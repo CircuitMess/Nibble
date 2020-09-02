@@ -3,8 +3,11 @@
 
 #include "Pins.hpp"
 
-class Display;
-class I2cExpander;
+#include <CircuitOS.h>
+#include <Display/Display.h>
+#include <Display/Sprite.h>
+#include <Input/I2cExpander.h>
+#include <Input/InputI2C.h>
 
 class NibbleImpl {
 public:

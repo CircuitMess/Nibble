@@ -1,8 +1,4 @@
 #include "Nibble.h"
-#include <CircuitOS.h>
-#include <Display/Display.h>
-#include <Input/I2cExpander.h>
-#include <Input/InputI2C.h>
 
 NibbleImpl Nibble;
 
