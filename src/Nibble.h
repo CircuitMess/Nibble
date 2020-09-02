@@ -15,11 +15,13 @@ public:
 
 	Display* getDisplay();
 	I2cExpander* getExpander();
+	InputI2C* getInput();
 
 
 private:
 	Display* display;
 	I2cExpander* expander;
+	InputI2C* input;
 
 };
 

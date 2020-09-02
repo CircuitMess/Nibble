@@ -14,7 +14,7 @@ void NibbleImpl::begin(){
 	expander->pinMode(BL_PIN, OUTPUT);
 	expander->pinWrite(BL_PIN, 1);
 
-	InputI2C* input = new InputI2C(expander);
+	input = new InputI2C(expander);
 	input->preregisterButtons({ BTN_A, BTN_B, BTN_C, BTN_UP, BTN_DOWN, BTN_RIGHT, BTN_LEFT });
 }
 
@@ -24,4 +24,8 @@ Display* NibbleImpl::getDisplay(){
 
 I2cExpander* NibbleImpl::getExpander(){
 	return expander;
+}
+
+InputI2C* NibbleImpl::getInput(){
+	return input;
 }
