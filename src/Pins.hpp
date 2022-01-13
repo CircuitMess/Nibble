@@ -10,6 +10,7 @@
 #define BTN_C 6
 
 #define BUZZ_PIN 12
-#define BL_PIN 8
+#define BL_PIN_I2C 8
+#define BL_PIN_IO 15
 
 #endif //NIBBLE_PINS_HPP
