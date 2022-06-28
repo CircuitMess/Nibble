@@ -38,8 +38,51 @@ void NibbleImpl::begin(){
 
 	display = new Display(128, 128, -1, 0);
 	display->begin();
+	if(settings()->displayTab == 1){
+		display->getTft()->init(INITR_GREENTAB3);
+	}
 	display->getBaseSprite()->clear(TFT_BLACK);
 	display->commit();
+
+	input->loop(0);
+
+	uint8_t portRead = 0;
+	for(int i = 0; i < 7; i++){
+		portRead |= (~Nibble.getInput()->getButtonState(i) & 1) << i;
+	}
+	portRead = portRead & 0b01111111;
+
+	if(input->getButtonState(BTN_C) && portRead){
+		Sprite* canvas = display->getBaseSprite();
+		canvas->setTextFont(0);
+		canvas->setTextColor(TFT_WHITE);
+		canvas->setTextSize(1);
+		canvas->setCursor(0, 60);
+		canvas->printCenter("Hold MENU\n");
+		canvas->printCenter("to switch\n");
+		canvas->printCenter("display driver.");
+		display->commit();
+
+		uint32_t time = millis();
+		while(millis() - time <= 2000){
+			delay(100);
+			input->loop(0);
+			if(!input->getButtonState(BTN_C)) break;
+		}
+
+		if(input->getButtonState(BTN_C)){
+			settings()->displayTab = !settings()->displayTab;
+			Settings::store();
+
+			canvas->clear(TFT_BLACK);
+			display->commit();
+
+			display->getTft()->init(settings()->displayTab ? INITR_GREENTAB3 : INITR_GREENTAB128);
+		}
+
+		canvas->clear(TFT_BLACK);
+		display->commit();
+	}
 
 	Piezo.begin(BUZZ_PIN);
 }
