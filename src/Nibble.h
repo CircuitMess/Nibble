@@ -10,6 +10,17 @@
 #include <Input/InputShift.h>
 #include <Input/InputI2C.h>
 #include <Audio/Piezo.h>
+#include <Util/Settings.h>
+
+struct NibbleSettings {
+	int sleepTime = 300;
+	int shutdownTime = 30;
+	bool audio = true;
+	bool calibrated = false;
+	uint8_t displayTab = 0;
+};
+
+NibbleSettings* settings();
 
 class NibbleImpl {
 public:

@@ -3,6 +3,16 @@
 NibbleImpl Nibble;
 
 void NibbleImpl::begin(){
+
+	if(!Settings::init(new NibbleSettings, sizeof(NibbleSettings))){
+		settings()->shutdownTime = 300; //5 minutes
+		settings()->sleepTime = 30; //30 seconds
+		settings()->audio = true; //audio on
+		settings()->calibrated = false;
+		settings()->displayTab = 0;
+		Settings::store();
+	}
+
 	expander = new I2cExpander();
 
 	if(expander->begin(0x74, 4, 5)){
@@ -61,4 +71,8 @@ I2cExpander* NibbleImpl::getExpander(){
 
 Input* NibbleImpl::getInput(){
 	return input;
+}
+
+NibbleSettings* settings(){
+	return static_cast<NibbleSettings*>(Settings::data());
 }
